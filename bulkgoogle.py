@@ -19,5 +19,5 @@ def google(keywords):
 with open('./bulkgoogling.txt', 'r') as f:
     keywords = f.read().splitlines()
     for kw in keywords:
-        print("[bold]Sexarching for[/bold] [underline]" + kw + "[/underline]")
+        print("[bold]Searching for[/bold] [underline]" + kw + "[/underline]")
         google(kw)
