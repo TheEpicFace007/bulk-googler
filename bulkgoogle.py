@@ -40,7 +40,6 @@ class MainFrame(tkinter.Tk):
         self.wm_iconphoto(True, tkinter.PhotoImage(file='icon.png'))
         # When the user press supprr or backspace, remove the keyword
         self.bind("<Delete>", lambda event: self.remove_keyword())
-        self.bind("<BackSpace>", lambda event: self.remove_keyword())
 
         self.create_variables()
         self.create_widgets()
