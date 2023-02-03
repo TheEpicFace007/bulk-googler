@@ -47,7 +47,7 @@ if __name__ == "__main__":
             is_console = True
         elif sys.argv[1] in ["-g", "--gui"]:
             is_console = False
-    except:
+    except IndexError:
         is_console = False
     finally:
         if is_console:
