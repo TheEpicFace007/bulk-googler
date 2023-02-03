@@ -8,6 +8,7 @@ import sys
 from tkinter import ttk
 
 from rich import print
+from PIL import Image, ImageTk
 
 if not os.path.exists("./bulkgoogling.txt"):
     with open('./bulkgoogling.txt', 'w') as f:
@@ -35,7 +36,8 @@ class MainFrame(tkinter.Tk):
         tkinter.Tk.__init__(self, *args, **kwargs)
         self.title("Bulk Googler")
         # Set the icon
-        self.iconbitmap("icon.ico")
+        self.wm_iconphoto(True, tkinter.PhotoImage(file='icon.png'))
+
         self.create_variables()
         self.create_widgets()
         self.create_layout()
@@ -140,5 +142,10 @@ if __name__ == "__main__":
         if is_console:
             bulkgoogle()
         else:
-            app = MainFrame()
-            app.mainloop()
+            try:
+                app = MainFrame()
+                app.mainloop()
+            except e as Exception:
+                print(e)
+                tkinter.messagebox.showerror("Error", e)
+                exit(1)
