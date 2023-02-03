@@ -6,6 +6,7 @@ import tkinter
 import tkinter.messagebox
 import sys
 from tkinter import ttk
+import traceback
 
 from rich import print
 from PIL import Image, ImageTk
@@ -52,6 +53,8 @@ class MainFrame(tkinter.Tk):
         self.keywordsEntry = ttk.Entry(self, textvariable=self.keywords)
         self.keywordsEntry.grid(row=0, column=1, sticky="ew", padx=5)
         self.keywordsEntry.config(width=40)
+        # When the user presses enter, add the keyword
+        self.keywordsEntry.bind("<Return>", lambda event: self.add_keyword())
 
         self.addKeywordButton = ttk.Button(
             self, text="Add Keyword", command=self.add_keyword)
@@ -106,7 +109,7 @@ class MainFrame(tkinter.Tk):
     def add_keyword(self):
         if self.keywords.get().isspace() or self.keywords.get() == "":
             tkinter.messagebox.showerror(
-                "Error", "Please enter keywords to search for")
+                "Error", "Please enter keywords to search for", parent=self)
             return
 
         with open('./bulkgoogling.txt', 'a') as f:
@@ -149,7 +152,7 @@ if __name__ == "__main__":
             try:
                 app = MainFrame()
                 app.mainloop()
-            except e as Exception:
+            except Exception as e:
                 print(e)
-                tkinter.messagebox.showerror("Error", e)
+                tkinter.messagebox.showerror("Internal Error", traceback.format_exception(e))
                 exit(1)
