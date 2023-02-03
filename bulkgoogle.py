@@ -104,6 +104,11 @@ class MainFrame(tkinter.Tk):
         self.geometry("500x500")
 
     def add_keyword(self):
+        if not self.keywords.get().isspace():
+            tkinter.messagebox.showerror(
+                "Error", "Please enter a keyword to search for")
+            return
+            
         with open('./bulkgoogling.txt', 'a') as f:
             f.writelines([self.keywords.get()])
             f.write("\n")
@@ -112,14 +117,13 @@ class MainFrame(tkinter.Tk):
 
     def populate_listbox(self):
         # If the listbox is not empty or does not contain only spaces
-        if self.keywords.get() != "" or self.keywords.get().isspace() == False:
-            with open('./bulkgoogling.txt') as f:
-                # Clear the listbox
-                self.listbox.delete(0, tkinter.END)
-                # Populate the listbox
-                for line in f.readlines():
-                    self.listbox.insert(tkinter.END, line)
-                f.close()
+        with open('./bulkgoogling.txt') as f:
+            # Clear the listbox
+            self.listbox.delete(0, tkinter.END)
+            # Populate the listbox
+            for line in f.readlines():
+                self.listbox.insert(tkinter.END, line)
+            f.close()
             
         # Clear the 
         self.keywords.set("")
