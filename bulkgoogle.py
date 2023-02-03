@@ -104,11 +104,11 @@ class MainFrame(tkinter.Tk):
         self.geometry("500x500")
 
     def add_keyword(self):
-        if not self.keywords.get().isspace():
+        if self.keywords.get().isspace() or self.keywords.get() == "":
             tkinter.messagebox.showerror(
-                "Error", "Please enter a keyword to search for")
+                "Error", "Please enter keywords to search for")
             return
-            
+
         with open('./bulkgoogling.txt', 'a') as f:
             f.writelines([self.keywords.get()])
             f.write("\n")
